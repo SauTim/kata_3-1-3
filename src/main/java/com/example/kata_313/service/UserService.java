@@ -7,7 +7,7 @@ import com.example.kata_313.entity.User;
 import java.util.List;
 
 public interface UserService {
-    User findByLogin(String login);
+    UserDto findByLogin(String login);
 
     User findUserById(long id);
 
