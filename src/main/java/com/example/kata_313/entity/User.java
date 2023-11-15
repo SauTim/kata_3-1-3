@@ -2,6 +2,7 @@ package com.example.kata_313.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -37,6 +39,17 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    public User() {
+
+    }
+
+    public User(Long id, String login, String password, Integer age, Set<Role> roles) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.age = age;
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

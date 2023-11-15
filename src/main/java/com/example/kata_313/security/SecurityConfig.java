@@ -1,7 +1,5 @@
 package com.example.kata_313.security;
 
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,11 +46,6 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new LoginSuccessHandler();
-    }
-
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
     }
 
     @Bean

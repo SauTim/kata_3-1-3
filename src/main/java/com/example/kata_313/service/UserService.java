@@ -1,6 +1,7 @@
 package com.example.kata_313.service;
 
 
+import com.example.kata_313.dto.UserDto;
 import com.example.kata_313.entity.User;
 
 import java.util.List;
@@ -12,10 +13,9 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    void addNewUser(User user);
+    User addNewUser(UserDto user);
 
-    void updateUser(User user);
+    User updateUser(UserDto userDto, long id);
 
     void deleteUserById(long id);
-
 }
