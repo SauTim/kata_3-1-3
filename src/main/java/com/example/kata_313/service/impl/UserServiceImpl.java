@@ -32,8 +32,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User findByLogin(String login) {
-        return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("User with such login does not exist"));
+    public UserDto findByLogin(String login) {
+        User user = userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("User with such login does not exist"));
+        UserDto userDto = mapUserToDto(user);
+        return userDto;
     }
 
     @Override
@@ -77,6 +79,16 @@ public class UserServiceImpl implements UserService {
                 .login(dto.getLogin())
                 .roles(roleSet)
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                .build();
+    }
+
+    private UserDto mapUserToDto(User entity) {
+
+        return UserDto.builder()
+                .id(entity.getId())
+                .age(entity.getAge())
+                .login(entity.getLogin())
+                .roles(entity.getRoles().stream().map(Role::getRole).toArray(String[]::new))
                 .build();
     }
 }
