@@ -1,7 +1,6 @@
 package com.example.kata_313.controller;
 
 import com.example.kata_313.dto.UserDto;
-import com.example.kata_313.entity.User;
 import com.example.kata_313.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +20,6 @@ public class UsersController {
 
     @GetMapping("/user")
     public String showUser() {
-
         return "user";
     }
 

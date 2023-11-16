@@ -52,6 +52,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.formLogin(form -> form
                 .loginPage("/login")
+                .failureUrl("/login-error")
                 .successHandler(myAuthenticationSuccessHandler())
                 .loginProcessingUrl("/login")
                 .usernameParameter("j_username")
