@@ -7,28 +7,25 @@ function showAllUsers() {
         .then(response => response.json())
         .then(users => {
             users.forEach(function (user) {
-                var row = tBody.insertRow();
-                row.setAttribute("id", user.id);
-                var cell0 = row.insertCell();
+                let row = tBody.insertRow(0);
+                row.id = user.id
+                let cell0 = row.insertCell(0);
                 cell0.innerHTML = user.id;
-                var cell1 = row.insertCell();
-                cell1.innerHTML = user.name;
-                var cell2 = row.insertCell();
-                cell2.innerHTML = user.lastName;
-                var cell3 = row.insertCell();
-                cell3.innerHTML = user.age;
-                var cell4 = row.insertCell();
-                cell4.innerHTML = user.email;
-                var cell5 = row.insertCell();
-                cell5.innerHTML = listRoles(user).textContent;
+                let cell1 = row.insertCell(1);
+                cell1.innerHTML = user.login;
+                let cell2 = row.insertCell(2);
+                cell2.innerHTML = user.age;
+                let cell3 = row.insertCell(3);
+                cell3.innerHTML = listRoles(user).textContent;
 
-                var cell6 = row.insertCell();
-                cell6.innerHTML =
+                let cell4 = row.insertCell();
+                cell4.innerHTML =
                     '<button type="button" onclick="getModalEdit(' + user.id + ')" class="btn btn-primary btn-sm">Edit</button>';
 
-                var cell7 = row.insertCell();
-                cell7.innerHTML =
+                let cell5 = row.insertCell();
+                cell5.innerHTML =
                     '<button type="button" onclick="getModalDelete(' + user.id + ')" class="btn btn-danger btn-sm">Delete</button>';
             })
         });
+    console.log(tBody);
 }

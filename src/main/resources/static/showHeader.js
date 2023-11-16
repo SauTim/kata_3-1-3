@@ -5,7 +5,7 @@ function showHeader() {
         .then(response => response.json())
         .then(user => {
 
-            document.getElementById("header_email").innerHTML = user.email;
+            document.getElementById("header_email").innerHTML = user.login;
 
             document.getElementById("header_roles").innerHTML = 'with roles: ' + listRoles(user).textContent;
         });
