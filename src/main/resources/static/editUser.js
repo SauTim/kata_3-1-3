@@ -25,7 +25,7 @@ function editUser() {
     console.log(json)
     let id = window.formEditUser.editID.value;
 
-    fetch('http://localhost:8080/admin/users/' + id, {
+    fetch('http://localhost:8080/admin/users', {
         method: 'PUT',
         body: JSON.stringify({
             id: window.formEditUser.editID.value,
