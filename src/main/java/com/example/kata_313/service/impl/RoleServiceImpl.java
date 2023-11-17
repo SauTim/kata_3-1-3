@@ -6,12 +6,14 @@ import com.example.kata_313.repository.RoleRepository;
 import com.example.kata_313.service.RoleService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
@@ -20,26 +22,18 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
-    }
-
-    @Override
     public Role getRoleByName(String roleName) {
         return roleRepository.findByRole(roleName).orElseThrow(() -> new EntityNotFoundException("Role not found"));
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Role save(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public void appendRoles(long id, UserDto response) {
-
-    }
-
-    @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Set<Role> getRolesByNames(UserDto userDto) {
         Set<Role> roleSet = new HashSet<>();
 

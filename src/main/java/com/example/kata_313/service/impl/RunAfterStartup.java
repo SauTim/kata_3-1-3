@@ -9,8 +9,10 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -27,9 +29,10 @@ public class RunAfterStartup {
     }
 
     @EventListener(ApplicationReadyEvent.class)
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void populateDataBase() {
-        Optional<User> tim = userRepository.findByLogin("tim");
-        if (tim.isPresent()) {
+        List<User> allUsers = userRepository.findAll();
+        if (!allUsers.isEmpty()) {
             return;
         }
 
