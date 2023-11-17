@@ -3,20 +3,21 @@ package com.example.kata_313.service;
 
 import com.example.kata_313.dto.InfoMessageDto;
 import com.example.kata_313.dto.UserDto;
-import org.springframework.http.ResponseEntity;
+import com.example.kata_313.entity.Role;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     UserDto findByLogin(String login);
 
-    ResponseEntity<UserDto> findUserById(long id);
+    UserDto findUserById(long id);
 
-    ResponseEntity<List<UserDto>> findAllUsers();
+    List<UserDto> findAllUsers();
 
-    ResponseEntity<UserDto> addNewUser(UserDto user);
+    UserDto addNewUser(UserDto user, Set<Role> rolesForAccount);
 
-    ResponseEntity<UserDto> updateUser(UserDto userDto, long id);
+    UserDto updateUser(UserDto userDto, Set<Role> rolesForAccount);
 
-    ResponseEntity<InfoMessageDto> deleteUserById(long id);
+    InfoMessageDto deleteUserById(long id);
 }
